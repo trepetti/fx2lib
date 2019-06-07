@@ -1,4 +1,4 @@
-// Copyright (C) 2009 Ubixum, Inc. 
+// Copyright (C) 2009 Ubixum, Inc.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,5 +51,5 @@ void sio0_init( DWORD baud_rate ) __critical ; // baud_rate max should be 57600 
  putchar('\\n') or putchar('\\r') both transmit \\r\\n
  Just use one or the other. (This makes terminal echo easy)
 **/
-void putchar(char c);
-char getchar();
+int putchar(int c);
+int getchar();
