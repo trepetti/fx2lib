@@ -106,7 +106,8 @@ burn: $(BUILDDIR)/$(BASENAME).ihx
 				      -d 04b4:8613
 
 erase:
-	fx2load -v $(VID) -p $(PID) $(FX2LIBDIR)/erase_eeprom.ihx
+	fx2load -v $(VID) -p $(PID) $(FX2LIBDIR)/erase_eeprom.bix
+	sleep 30
 
 clean:
 	rm -f $(foreach ext, a51 asm ihx lnk lk lst map mem rel rst rest sym adb cdb bix, $(BUILDDIR)/*.${ext})
