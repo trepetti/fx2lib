@@ -97,6 +97,17 @@ $(BUILDDIR)/$(BASENAME).iic: $(BUILDDIR)/$(BASENAME).ihx
 load: $(BUILDDIR)/$(BASENAME).bix
 	fx2load -v $(VID) -p $(PID) $(BUILDDIR)/$(BASENAME).bix
 
+burn: $(BUILDDIR)/$(BASENAME).ihx
+	sudo fxload -t fx2lp \
+		          -D /dev/bus/usb$$(lsusb | grep -i cypress | cut -d':' -f 1 | sed 's/ \?[[:alpha:]]\+ /\//g') \
+				      -I $(BUILDDIR)/$(BASENAME).ihx \
+				      -s $(FX2LIBDIR)/vend_ax.ihx \
+				      -c 0x01 \
+				      -d 04b4:8613
+
+erase:
+	fx2load -v $(VID) -p $(PID) $(FX2LIBDIR)/erase_eeprom.ihx
+
 clean:
 	rm -f $(foreach ext, a51 asm ihx lnk lk lst map mem rel rst rest sym adb cdb bix, $(BUILDDIR)/*.${ext})
 
